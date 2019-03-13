@@ -1,0 +1,21 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@172.1.16.126:8761/eureka
+    register-with-eureka: true
+  server:
+    enable-self-preservation: true
+    peer-node-read-timeout-ms: 1000
+  instance:
+    prefer-ip-address: true
+#    instance-id: 122.112.253.220:${server.port}
+
+spring:
+  application:
+    name: ylt-eureka
+  security:
+    user:
+      name: qdsg
+      password: qdsg2018
+server:
+  port: 8762

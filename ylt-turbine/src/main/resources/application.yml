@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ylt-turbine
+  security:
+    user:
+      name: qdsg
+      password: qdsg2018
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@master.qdsgvision.com:8761/eureka,http://${spring.security.user.name}:${spring.security.user.password}@backup.qdsgvision.com:8762/eureka
+turbine:
+  combine-host-port: true
+server:
+  port: 9412
+
+
+
+

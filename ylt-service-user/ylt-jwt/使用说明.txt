@@ -1,0 +1,12 @@
+mvn clean install 安装当前项目到本地maven库
+
+业务集成项目 pom.xml 中添加依赖 
+<dependency>
+   <groupId>com.qdsg.ylt</groupId>
+   <artifactId>ywt-spring-boot-starter</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+</dependency>
+
+application.yml添加
+jwt-client:
+   user-server:  http://119.3.26.246:8098

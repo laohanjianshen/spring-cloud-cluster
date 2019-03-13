@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: ylt-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/wangzhe194/ylt_cloud_config
+          username: xingpengcheng
+          password: xingpengcheng123
+  rabbitmq:
+    username: guest
+    password: guest
+    host: 127.0.0.1
+    port: 5673
+eureka:
+  client:
+    service-url:
+      defaultZone: http://master.qdsgvision.com:8761/eureka/,http://backup.qdsgvision.com:8762/eureka/
+server:
+  port: 8888
+management:
+  endpoints:
+    web:
+      exposure:
+        include: bus-refresh
+

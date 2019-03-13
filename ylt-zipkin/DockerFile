@@ -1,0 +1,11 @@
+From hub.c.163.com/library/java:8-jre
+
+ADD target/*.jar ylt-zipkin.jar
+
+EXPOSE 9411
+
+ENTRYPOINT exec java $JAVA_OPTS -jar ylt-zipkin.jar
+
+
+
+

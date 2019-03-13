@@ -1,0 +1,12 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://master.qdsgvision.com:8761/eureka/
+    register-with-eureka: true
+  server:
+    enable-self-preservation: true
+spring:
+  application:
+    name: ylt-eureka
+server:
+  port: 8762

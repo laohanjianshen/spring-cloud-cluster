@@ -1,0 +1,15 @@
+server:
+  port: 8098 #项目端口
+eureka:
+  client:
+    service-url:
+      defaultZone: http://laohan:123@localhost:8761/eureka
+spring:
+  application:
+    name: user
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: config
+      profile: test

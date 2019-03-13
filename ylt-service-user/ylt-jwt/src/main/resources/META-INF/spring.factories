@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.qdsg.ylt.ylt_jwt.security.WebSecurityConfig

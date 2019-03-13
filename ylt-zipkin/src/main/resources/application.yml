@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: ylt-zipkin
+  security:
+    user:
+      name: qdsg
+      password: qdsg2018
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@master.qdsgvision.com:8761/eureka,http://${spring.security.user.name}:${spring.security.user.password}@backup.qdsgvision.com:8762/eureka
+server:
+  port: 9411
+management:
+  metrics:
+    web:
+      server:
+        auto-time-requests: false

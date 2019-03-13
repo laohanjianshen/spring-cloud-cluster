@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qdsg.ylt.ylt_user.dao.TbDoctorMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.qdsg.ylt.ylt_user.common.model.TbDoctor">
+        <id column="id" property="id"/>
+        <result column="tb_user_id" property="tbUserId"/>
+        <result column="hospital_id" property="hospitalId"/>
+        <result column="dept_id" property="deptId"/>
+        <result column="hos_doc_code" property="hosDocCode"/>
+        <result column="name" property="name"/>
+        <result column="en_name" property="enName"/>
+        <result column="sex" property="sex"/>
+        <result column="jobTitle" property="jobTitle"/>
+        <result column="desc" property="desc"/>
+        <result column="phone" property="phone"/>
+        <result column="achievement" property="achievement"/>
+        <result column="evaluate" property="evaluate"/>
+        <result column="sort" property="sort"/>
+        <result column="op_user_id" property="opUserId"/>
+        <result column="status" property="status"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, tb_user_id AS tbUserId, hospital_id AS hospitalId, dept_id AS deptId, hos_doc_code AS hosDocCode, name, en_name AS enName, sex, desc, phone, achievement, evaluate, sort, op_user_id AS opUserId, status, create_date AS createDate
+    </sql>
+
+    <select id="selectDoctorInfoByUserId" parameterType="java.lang.Long" resultType="java.util.Map">
+        select
+            #{userId} as userId,
+            d.id as docId,
+            d.name as name,
+            d.phone as phone,
+            d.achievement as achievement,
+            h.name as hosName,
+            h.hos_type as hosType,
+            h.simple_name as hosSimpleName,
+            dept.name as deptName,
+            a.name as area
+        from
+            tb_doctor d,
+            tb_hospital h,
+            tb_dept dept,
+            tb_area a
+        where
+            1=1 and
+            d.flag = 1 and
+            h.flag = 1 and
+            dept.flag = 1 and
+            a.flag = 1 and
+            d.hospital_id = h.id and
+            d.dept_id = dept.id and
+            h.area_id = a.id and
+            d.tb_user_id = #{userId}
+    </select>
+
+    <select id="selectDoctorInfoByDocId" parameterType="java.lang.Long" resultType="java.util.Map">
+        select
+            u.id as userId,
+            d.id as docId,
+            d.name as name,
+            d.phone as phone,
+            d.achievement as achievement,
+            h.name as hosName,
+            h.hos_type as hosType,
+            h.simple_name as hosSimpleName,
+            dept.name as deptName,
+            a.name as area
+        from
+            tb_doctor d,
+            tb_hospital h,
+            tb_dept dept,
+            tb_area a,
+            tb_user u
+        where
+            1=1 and
+            d.flag = 1 and
+            h.flag = 1 and
+            dept.flag = 1 and
+            a.flag = 1 and
+            d.hospital_id = h.id and
+            d.dept_id = dept.id and
+            h.area_id = a.id and
+            d.tb_user_id = u.id and
+            d.id = #{docId}
+    </select>
+
+    <select id="selectHosTypeByDocId" resultType="Map" parameterType="java.lang.Long">
+        select h.hos_type,d.name docName from tb_doctor d,tb_hospital h
+        where
+          d.id = #{v} and
+          h.id = d.hospital_id
+    </select>
+    <select id="selectPerInfoByDocId" resultType="Map" parameterType="java.lang.Long">
+      SELECT
+    u.id userId,
+	u.account,
+	d. NAME doctorName,
+	u.sex,
+	u.birth,
+	u.mobile,
+	u.email,
+	d.jobTitle,
+	d.DESC
+    FROM
+	tb_doctor d
+    inner JOIN tb_user u ON d.id = #{docId}
+    AND u.id = d.tb_user_id
+    </select>
+    <select id="selectHosInfoByUserId" resultType="Map" parameterType="java.lang.Long">
+    SELECT
+	t.NAME deptName,
+	h.NAME HosName
+    FROM
+	tb_doctor d
+    INNER JOIN tb_dept t ON d.dept_id = t.id
+    AND d.tb_user_id = #{userId} and d.flag = 1
+    INNER JOIN tb_hospital h ON d.hospital_id = h.id
+    </select>
+    <select id="selectDocNameByDeptId" resultType="Map">
+        select id docId,name docName from tb_doctor where dept_id = #{deptId} and hospital_id = #{hosId}
+    </select>
+    <select id="selectDoctorInfoByHosId" resultType="java.util.Map">
+       select
+            d.tb_user_id as userId,
+            d.id as docId,
+            d.name as name,
+            d.phone as phone,
+            d.achievement as achievement,
+            h.name as hosName,
+            h.hos_type as hosType,
+            h.simple_name as hosSimpleName,
+            dept.name as deptName,
+            a.name as area
+        from
+            tb_doctor d,
+            tb_hospital h,
+            tb_dept dept,
+            tb_area a
+        where
+            1=1 and
+            d.flag = 1 and
+            h.flag = 1 and
+            dept.flag = 1 and
+            a.flag = 1 and
+			d.hospital_id = #{hosId} and
+			d.hos_doc_code = #{hosDocCode} and
+            d.hospital_id = h.id and
+            d.dept_id = dept.id and
+            h.area_id = a.id
+    </select>
+
+
+</mapper>

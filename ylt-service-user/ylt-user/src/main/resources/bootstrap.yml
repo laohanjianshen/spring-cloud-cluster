@@ -1,0 +1,28 @@
+server:
+  port: 8098 #项目端口
+eureka:
+  client:
+    service-url:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@master.qdsgvision.com:8761/eureka,http://${spring.security.user.name}:${spring.security.user.password}@backup.qdsgvision.com:8762/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: 119.3.48.53:${server.port}
+
+spring:
+  application:
+    name: user
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: ylt-config
+      profile: dev
+  security:
+    user:
+      name: qdsg
+      password: qdsg2018
+  zipkin:
+    base-url: http://master.qdsgvision.com:9411/
+  sleuth:
+    sampler:
+      probability: 0.2

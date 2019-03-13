@@ -1,0 +1,7 @@
+From hub.c.163.com/library/java:8-jre
+
+ADD target/*.jar ylt-config-02.jar
+
+EXPOSE 8889
+
+ENTRYPOINT ["java", "-jar", "ylt-config-02.jar"]
